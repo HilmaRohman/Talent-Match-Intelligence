@@ -1,0 +1,21 @@
+# ===============================
+# Streamlit & environment secrets
+# ===============================
+.streamlit/
+secrets.toml
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual environment folders
+venv/
+.env/
+.venv/
+
+# Jupyter checkpoints (if any)
+.ipynb_checkpoints/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

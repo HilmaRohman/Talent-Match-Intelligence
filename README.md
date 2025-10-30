@@ -10,7 +10,7 @@ A parameterized, AI-powered interface that transforms SQL talent matching result
 - **Interactive Dashboard**: Match distributions, strengths analysis, candidate comparisons
 - **Dynamic SQL Execution**: Recompute baselines and rerun queries without code changes
 
-## 📋 Step 3 Requirements Met
+## 📋 Application Requirements
 
 ### ✅ Inputs (Runtime, User-Provided)
 - Role name, Job level, Role purpose, Selected benchmark employee IDs
@@ -28,7 +28,7 @@ A parameterized, AI-powered interface that transforms SQL talent matching result
 
 ## 🛠 Quick Start
 
-1. **Install dependencies**:
+**Install dependencies**:
 ```bash
 pip install -r requirements.txt
 Configure database in .streamlit/secrets.toml

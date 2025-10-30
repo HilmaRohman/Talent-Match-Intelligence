@@ -1,4 +1,4 @@
-# 🎯 AI Talent Matching Dashboard - Step 3
+# 🎯 AI Talent Matching Dashboard
 
 A parameterized, AI-powered interface that transforms SQL talent matching results into actionable insights through dynamic visualizations and AI-generated profiles.
 

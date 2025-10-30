@@ -31,8 +31,10 @@ A parameterized, AI-powered interface that transforms SQL talent matching result
 **Install dependencies**:
 ```bash
 pip install -r requirements.txt
+```
 Configure database in .streamlit/secrets.toml
 
 Run the application:
+```bash
 streamlit run app.py
 ```

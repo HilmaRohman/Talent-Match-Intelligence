@@ -25,7 +25,6 @@ def execute_talent_matching_query(job_vacancy_id, role_name, job_level, selected
 
     weights_json = json.dumps(weights_config)
     
-    # REAL SQL Query dengan nama yang jelas
     query = """
     WITH benchmark_config AS (
         SELECT 
@@ -161,17 +160,14 @@ def execute_talent_matching_query(job_vacancy_id, role_name, job_level, selected
     )
     
     try:
-        # Gunakan placeholder untuk temporary message
         progress_placeholder = st.empty()
         progress_placeholder.info("🔄 Running REAL talent matching with benchmark analysis...")
         
         results_df = execute_sql_query(query, params)
         
-        # Hapus progress message setelah selesai
         progress_placeholder.empty()
         
         if not results_df.empty:
-            # Apply ML weights untuk final match rate
             if use_ml_weights:
                 results_df['match_rate'] = (
                     results_df['competency_match_rate'] * 0.646 +
@@ -198,16 +194,13 @@ def execute_talent_matching_query(job_vacancy_id, role_name, job_level, selected
         return results_df
         
     except Exception as e:
-        # Pastikan progress message dihapus meski ada error
         if 'progress_placeholder' in locals():
             progress_placeholder.empty()
         st.error(f"❌ REAL talent matching failed: {str(e)}")
-        # Fallback ke simplified ranking dengan nama jelas
         return generate_simplified_ranking_with_clear_names(selected_benchmark_ids, use_ml_weights)
 def generate_simplified_ranking_with_clear_names(benchmark_ids, use_ml_weights):
     """Simplified ranking dengan nama candidates yang jelas dan realistis"""
     
-    # Daftar nama Indonesia yang jelas dan profesional
     clear_names = [
         "Ahmad Wijaya", "Sari Dewanti", "Budi Santoso", "Maya Purnama", "Rizki Ramadhan",
         "Dian Kusuma", "Eko Pratama", "Fitri Handayani", "Guntur Siregar", "Hana Lestari",
@@ -219,7 +212,6 @@ def generate_simplified_ranking_with_clear_names(benchmark_ids, use_ml_weights):
     ]
     
     try:
-        # Query untuk mendapatkan data employees
         query = """
         SELECT 
             e.employee_id,
@@ -246,14 +238,12 @@ def generate_simplified_ranking_with_clear_names(benchmark_ids, use_ml_weights):
         LIMIT 35
         """
         
-        # Format benchmark IDs untuk SQL IN clause
         benchmark_ids_str = ", ".join([f"'{bid}'" for bid in benchmark_ids])
         query = query % benchmark_ids_str
         
         results_df = execute_sql_query(query)
         
         if not results_df.empty:
-            # Gunakan nama yang jelas dari list kita
             for i, (idx, row) in enumerate(results_df.iterrows()):
                 if i < len(clear_names):
                     results_df.at[idx, 'fullname'] = clear_names[i]
@@ -293,7 +283,6 @@ def generate_simplified_ranking_with_clear_names(benchmark_ids, use_ml_weights):
                 
             results_df['match_rate'] = results_df['match_rate'].round(1)
             
-            # Rename columns untuk konsistensi
             results_df = results_df.rename(columns={'fullname': 'name'})
             results_df = results_df.sort_values('match_rate', ascending=False)
             
@@ -303,13 +292,11 @@ def generate_simplified_ranking_with_clear_names(benchmark_ids, use_ml_weights):
     except Exception as e:
         st.error(f"❌ Enhanced simplified ranking failed: {e}")
     
-    # Final fallback - generate data manual dengan nama jelas
     return generate_manual_ranking_with_clear_names(benchmark_ids, use_ml_weights)
 
 def generate_manual_ranking_with_clear_names(benchmark_ids, use_ml_weights):
     """Generate manual ranking dengan nama yang sangat jelas dan realistis"""
     
-    # Data candidates dengan nama jelas dan profile realistis
     manual_candidates = [
         {
             'employee_id': 'EMP2024001', 'name': 'Ahmad Wijaya', 
@@ -405,7 +392,6 @@ def generate_manual_ranking_with_clear_names(benchmark_ids, use_ml_weights):
     
     results_df = pd.DataFrame(manual_candidates)
     
-    # Apply ML weights untuk final match rate
     if use_ml_weights:
         results_df['match_rate'] = (
             results_df['competency_match_rate'] * 0.646 +
@@ -426,21 +412,17 @@ def generate_manual_ranking_with_clear_names(benchmark_ids, use_ml_weights):
 def generate_simplified_ranking(employees_df, benchmark_ids, use_ml_weights):
     """Fallback simplified ranking dari DataFrame"""
     try:
-        # Jika employees_df tidak kosong, gunakan data yang ada
         if not employees_df.empty:
             candidate_pool = employees_df[~employees_df['employee_id'].isin(benchmark_ids)].copy()
             
             if candidate_pool.empty:
                 return generate_manual_ranking_with_clear_names(benchmark_ids, use_ml_weights)
             
-            # Gunakan nama asli dari database
             ranked_talent = []
             
             for _, candidate in candidate_pool.iterrows():
-                # Gunakan nama asli dari database
                 name = candidate.get('fullname', 'Unknown Employee')
                 
-                # Hitung match rate realistis
                 base_match = 65
                 
                 # Position relevance

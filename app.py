@@ -24,21 +24,34 @@ def main():
     
     # RUNTIME INPUTS - User Provided
     with st.sidebar:
-        st.header("🎯 Job Requirements")
-        
-        role_name = st.text_input("Role Name", "Data Analyst")
-        job_level = st.selectbox("Job Level", ["Junior", "Middle", "Senior", "Lead"])
-        role_purpose = st.text_area("Role Purpose", "Analyze data to provide business insights")
-        
-        st.header("📊 Benchmark Selection")
-        
-        # Load employees dari database
+        with st.sidebar:
+            st.header("🎯 Job Requirements")
+            
+            role_name = st.text_input(
+                "Role Name", 
+                value="",  
+                placeholder="e.g., Data Analyst, Marketing Manager"  
+            )
+            
+            job_level = st.selectbox(
+                "Job Level", 
+                ["", "Junior", "Middle", "Senior", "Lead"],
+                index=0 
+            )
+            
+            role_purpose = st.text_area(
+                "Role Purpose", 
+                value="",
+                placeholder="e.g., Analyze data to provide business insights, Develop marketing strategies"
+            )
+            
+            st.header("📊 Benchmark Selection")
+            
         employees_df = get_available_employees()
         
         selected_benchmark_ids = []
         
         if not employees_df.empty:
-            # Create dropdown options dengan informasi lengkap
             employee_options = {
                 f"{row['fullname']} ({row['position']} - {row['grade']})": row['employee_id']
                 for _, row in employees_df.iterrows()
@@ -127,16 +140,13 @@ def main():
             high_matches = len(ranked_talent_df[ranked_talent_df['match_rate'] > 80])
             st.metric("High Matches (>80%)", high_matches)
         
-        # Display ranked table dengan kolom yang diminta
         display_columns = ['name', 'match_rate', 'role', 'division', 'department', 'directorate', 'job_level']
         available_columns = [col for col in display_columns if col in ranked_talent_df.columns]
         
         display_df = ranked_talent_df[available_columns].copy()
         
-        # Format untuk display
         display_df['match_rate'] = display_df['match_rate'].round(1)
         
-        # Rename columns untuk tampilan yang lebih baik
         column_rename = {
             'name': 'Name',
             'match_rate': 'Match Rate %',
@@ -341,9 +351,7 @@ def main():
         Use the sidebar to configure your talent search!
         """)
 
-# =============================================================================
 # VISUALIZATION FUNCTIONS
-# =============================================================================
 
 def create_match_rate_distribution(ranked_talent_df):
     """Create histogram of match rate distribution"""
@@ -587,7 +595,7 @@ def create_empty_plot(message):
     return fig
 
 # =============================================================================
-# EXISTING FUNCTIONS (tetap sama)
+# EXISTING FUNCTIONS
 # =============================================================================
 
 def generate_ai_profile(role_name, job_level, role_purpose, benchmark_count):

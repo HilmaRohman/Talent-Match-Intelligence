@@ -86,15 +86,15 @@ def execute_sql_query(query, params=None):
 def get_dummy_employees():
     """Generate dummy employee data for fallback mode"""
     data = {
-        'employee_id': ['EMP100000', 'EMP100001', 'EMP100002', 'EMP100003', 'EMP100004', 'EMP100005', 'EMP100006', 'EMP100007', 'EMP100008', 'EMP100009'],
-        'fullname': ['Rendra Pratama', 'Wulan Setiawan', 'Julia Jatmiko Situmorang', 'Oka Halim', 'Dwi Pratama', 'Bayu Zulfikar', 'Indra Santoso', 'Rani Mahendra', 'Gita Permadi', 'Julia Anggara'],
-        'position': ['Brand Executive', 'HRBP', 'Sales Supervisor', 'HRBP', 'Supply Planner', 'Sales Supervisor', 'Finance Officer', 'HRBP', 'Finance Officer', 'Sales Supervisor'],
-        'grade': ['V', 'III', 'V', 'IV', 'III', 'V', 'III', 'IV', 'IV', 'V'],
-        'directorate': ['Technology', 'Technology', 'Technology', 'Commercial', 'Technology', 'Commercial', 'HR & Corp Affairs', 'HR & Corp Affairs', 'Commercial', 'Commercial'],
-        'department': ['R&D', 'Operations', 'Finance', 'HR', 'Operations', 'HR', 'HR', 'IT', 'Finance', 'R&D'],
-        'division': ['Product Dev', 'Talent Management', 'Digital Marketing', 'Digital Marketing', 'Product Dev', 'Product Dev', 'Digital Marketing', 'Operations', 'Talent Management', 'Sales'],
-        'company': ['PT Aurora Beauty Indonesia', 'PT Mandala Distribution Center', 'PT Aurora Beauty Indonesia', 'PT Aurora Beauty Indonesia', 'PT Lumo Cosmetics Asia', 'PT Aurora Beauty Indonesia', 'PT Aurora Beauty Indonesia', 'PT Mandala Distribution Center', 'PT VASKA Wellness', 'PT Aurora Beauty Indonesia'],
-        'years_of_service_months': [64, 16, 58, 15, 34, 66, 82, 56, 40, 77]
+        'employee_id': ['EMP100000', 'EMP100001', 'EMP100002', 'EMP100003', 'EMP100004', 'EMP100005', 'EMP100006', 'EMP100007', 'EMP100008', 'EMP100009', 'EMP100010', 'EMP100011', 'EMP100012'],
+        'fullname': ['Rendra Pratama', 'Wulan Setiawan', 'Julia Jatmiko Situmorang', 'Oka Halim', 'Dwi Pratama', 'Bayu Zulfikar', 'Indra Santoso', 'Rani Mahendra', 'Gita Permadi', 'Julia Anggara', 'Maya Jatmiko Handayani', 'Fajar Halim', 'Rendra Tri Purnama'],
+        'position': ['Brand Executive', 'HRBP', 'Sales Supervisor', 'HRBP', 'Supply Planner', 'Sales Supervisor', 'Finance Officer', 'HRBP', 'Finance Officer', 'Sales Supervisor', 'HRBP', 'Finance Officer', 'Data Analyst'],
+        'grade': ['V', 'III', 'V', 'IV', 'III', 'V', 'III', 'IV', 'IV', 'V', 'V', 'V', 'IV'],
+        'directorate': ['Technology', 'Technology', 'Technology', 'Commercial', 'Technology', 'Commercial', 'HR & Corp Affairs', 'HR & Corp Affairs', 'Commercial', 'Commercial', 'HR & Corp Affairs', 'Technology', 'Commercial'],
+        'department': ['R&D', 'Operations', 'Finance', 'HR', 'Operations', 'HR', 'HR', 'IT', 'Finance', 'R&D', 'IT', 'Operations', 'IT'],
+        'division': ['Product Dev', 'Talent Management', 'Digital Marketing', 'Digital Marketing', 'Product Dev', 'Product Dev', 'Digital Marketing', 'Operations', 'Talent Management', 'Sales', 'Operations', 'Operations', 'Operations'],
+        'company': ['PT Aurora Beauty Indonesia', 'PT Mandala Distribution Center', 'PT Aurora Beauty Indonesia', 'PT Aurora Beauty Indonesia', 'PT Lumo Cosmetics Asia', 'PT Aurora Beauty Indonesia', 'PT Aurora Beauty Indonesia', 'PT Mandala Distribution Center', 'PT VASKA Wellness', 'PT Aurora Beauty Indonesia', 'PT VASKA Wellness', 'PT Mandala Distribution Center', 'PT Aurora Beauty Indonesia'],
+        'years_of_service_months': [64, 16, 58, 15, 34, 66, 82, 56, 40, 77, 29, 51, 3]
     }
     df = pd.DataFrame(data)
     # st.info("🧩 Using dummy employee dataset (database fallback mode).")

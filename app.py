@@ -178,10 +178,10 @@ def main():
             fig_top = create_top_candidates_chart(ranked_talent_df)
             st.plotly_chart(fig_top, use_container_width=True)
             
-            # Experience vs Match Rate
-            st.subheader("📊 Experience vs Match Rate")
-            fig_exp = create_experience_vs_match(ranked_talent_df, employees_df)
-            st.plotly_chart(fig_exp, use_container_width=True)
+            # # Experience vs Match Rate
+            # st.subheader("📊 Experience vs Match Rate")
+            # fig_exp = create_experience_vs_match(ranked_talent_df, employees_df)
+            # st.plotly_chart(fig_exp, use_container_width=True)
         
         # Row 2: Benchmark Comparisons
         col3, col4 = st.columns(2)
@@ -324,10 +324,6 @@ def main():
     else:
         # Welcome screen
         st.markdown("""
-        ## 🎯 Welcome to AI Talent Matching Dashboard
-        
-        **Transform talent data into actionable insights through parameterized, AI-powered interface**
-        
         ### How it works:
         1. **Configure** job requirements in the sidebar
         2. **Select benchmark employees** from the database dropdown
